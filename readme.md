@@ -6,18 +6,24 @@ A blog post about this can be found [here](https://jacobgil.github.io/deeplearni
 It depends on [TensorLy](https://github.com/tensorly/tensorly) for performing tensor decompositions.
 
 # Usage
+1. Train a VGG11 model:
+```bash
+python3 main.py 
+--net vgg11 \
+--save_dir models/vgg11
+```
 
-- Train a model based on fine tuning VGG16: ``python main.py --train``.
-- There should be a dataset with two categories. One directory for each category. Training data should go into a directory called 'train'.  Testing data should go into a directory called 'test'. This can be controlled with the flags --train_path and --test_path.
-- I used the [Kaggle Cats/Dogs dataset.](https://www.kaggle.com/c/dogs-vs-cats)
-- The model is then saved into a file called "model".
+2. Fine tune with decomposed model: 
+```bash
+python3 main.py 
+--ckpt /path/to/trained_model.pth \
+--save_dir models/vgg11_decomposed \
+--decompose  \
+--decompose_method tucker \
+--learning_rate 0.0001
+```
 
-- Perform a decomposition: 
-``python main.py --decompose``
-This saves the new model into "decomposed_model".
-It uses the Tucker decomposition by default. To use CP decomposition, pass --cp.
-
-- Fine tune the decomposed model: ``python main.py --fine_tune``
+TODO: make fine tune decompose work
 
 # References
 
